@@ -1,3 +1,0 @@
-2017-01-01 00:00:00 Launching analysis for 1645940029 with LEAN Engine v2.5.0.0
-2017-01-01 00:00:00 Algorithm finished warming up.
-2020-12-30 16:00:00 Algorithm Id:(1645940029) completed in 1.48 seconds at 5k data points per second. Processing total of 7,020 data points.

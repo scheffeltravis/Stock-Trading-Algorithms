@@ -1,0 +1,13 @@
+2017-01-01 00:00:00 Launching analysis for 1647702129 with LEAN Engine v2.5.0.0
+2016-12-30 00:00:00 Algorithm warming up...
+2017-01-01 00:00:00 Algorithm finished warming up.
+2017-01-04 00:00:00 TRADE STATUS [0, 0, 0, 0]
+2017-01-04 00:00:00 TQQQ - 2017-01-04 00:00:00: Close=5.42958307266235
+2017-01-04 00:00:00 100000.0
+2017-01-05 00:00:00 Runtime Error: AttributeError : 'SecurityHolding' object has no attribute 'TotalHoldingsValue'
+  at OnData
+    str(self.Portfolio[self.symbol].TotalHoldingsValue))
+===
+   at Python.Runtime.PyObject.Invoke(PyTuple args in main.py: line 81
+
+2017-01-05 00:00:00 Algorithm Id:(1647702129) completed in 0.42 seconds at 0k data points per second. Processing total of 28 data points.

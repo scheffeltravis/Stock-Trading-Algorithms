@@ -5,8 +5,7 @@ from datetime import datetime, timedelta
 
 class YahooData(PythonData):
     def GetSource(self, config, date, isLiveMode):
-        # print(f'GetSource YAHOO for date {date}')
-
+        
         # The name of the asset is the symbol in lowercase .csv (ex. spy.csv)
         fname = config.Symbol.Value.lower() + '.csv'
 
@@ -18,10 +17,6 @@ class YahooData(PythonData):
         return SubscriptionDataSource(source.as_posix(), SubscriptionTransportMedium.LocalFile)
 
     def Reader(self, config, line, date, isLiveMode):
-
-        # print(f'Reading date {date}')
-        # print(f'line ==> {line}')
-
         equity = YahooData()
         equity.Symbol = config.Symbol
 

@@ -1,5 +1,10 @@
+# Basic configuration files
 **/.idea/
 **/.vscode/
 **/__pycache__/
 
+# We don't use the research books
 **/*.ipynb
+
+# We're excluding our backtest data for now
+**/backtests/

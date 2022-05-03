@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "file-database-last-update": "05/03/2022",
+=======
+  "file-database-last-update": "05/01/2022",
+>>>>>>> d6d6dfb761b3d4b6884c6162d42d04c1d7212755
   // this configuration file works by first loading all top-level
   // configuration items and then will load the specified environment
   // on top, this provides a layering affect. environment names can be

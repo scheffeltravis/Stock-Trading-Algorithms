@@ -6,22 +6,22 @@ from QuantConnect.Indicators import *
 
 
 class RangeAlgorithm(QCAlgorithm):
-    def __init__(self):
+    def Initialize(self):
         self.moving_averages_close = []
         self.moving_averages_high = []
         self.moving_averages_low = []
         self.ma_lengths = [6, 18]
         self.trade_status = [0, 0]
         # self.ticker = "^GSPC"
-        self.ticker = "TQQQ"
+        # self.ticker = "TQQQ"
         # self.ticker = "TNA"
         # self.ticker = "^IXIC"
         # self.ticker = "UPRO"
         # self.ticker = "UDOW"
         # self.ticker = "SOXL"
+        self.ticker = "AAPL"
 
-    def Initialize(self):
-        get_yahoo_data(self.ticker, '2015-01-01', '2022-04-23')
+        get_yahoo_data(self.ticker, '1990-11-01', '2019-03-07')
         # self.SetStartDate(2017, 1, 1)
         # self.SetEndDate(2018, 1, 1)
         # self.SetStartDate(2017, 1, 1)
@@ -36,8 +36,28 @@ class RangeAlgorithm(QCAlgorithm):
         # self.SetEndDate(2020, 12, 30)
         # self.SetStartDate(2017, 4, 22)
         # self.SetEndDate(2022, 4, 22)
-        self.SetStartDate(2017, 1, 1)
-        self.SetEndDate(2022, 4, 22)
+        # self.SetStartDate(2017, 4, 27)
+        # self.SetEndDate(2022, 4, 27)
+
+        # AAPL Regime Dates
+        # Downtrend High Volitility
+        # self.SetStartDate(2015, 6, 1)
+        # self.SetEndDate(2016, 2, 26)
+        # Downtrend Low Volitility
+        # self.SetStartDate(2012, 9, 4)
+        # self.SetEndDate(2013, 6, 28)
+        # Lateral High Volitility
+        # self.SetStartDate(1996, 8, 1)
+        # self.SetEndDate(1996, 12, 30)
+        # Lateral Low Volitility
+        # self.SetStartDate(2019, 2, 4)
+        # self.SetEndDate(2019, 3, 7)
+        # Uptrend High Volitility
+        # self.SetStartDate(2012, 2, 1)
+        # self.SetEndDate(2012, 9, 28)
+        # Uptrend Low Volitility
+        self.SetStartDate(1990, 11, 1)
+        self.SetEndDate(1991, 2, 27)
 
         self.SetCash(100000)
         self.SetWarmUp(100)
@@ -89,7 +109,7 @@ class RangeAlgorithm(QCAlgorithm):
         # this indicates that bearish trend will likely reverse so buy signal is issued
         if short_diff < long_diff and short_close < long_close and self.trade_status[0] == 0:
             self.trade_status[0] = 1
-            # resetting trade_status[1] since this means that range expansion has occurred and
+            # resetting trade_status[1] since this means that range contraction has occurred and
             # range contraction needs to be reset for when it occurs again
             self.trade_status[1] = 0
             changed = True

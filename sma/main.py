@@ -6,20 +6,29 @@ from QuantConnect.Indicators import *
 
 
 class SMAAlgorithm(QCAlgorithm):
-    def __init__(self):
+   # def __init__(self):
+    def Initialize(self):
         self.moving_averages_close = []
         self.moving_averages_high = []
         self.moving_averages_low = []
         # self.ma_lengths = [5, 10, 20, 62]
         self.ma_lengths = [62]
         self.trade_status = len(self.ma_lengths) * [0]
-        self.ticker = "UDOW"
+        #self.ticker = "TQQQ"
+        #self.ticker = "UDOW"        
+        # self.ticker = "^GSPC"
+        #self.ticker = "TQQQ"
+        #self.ticker = "TNA"
+        #self.ticker = "^IXIC"
+        #self.ticker = "UPRO"
+        # self.ticker = "UDOW"
+        self.ticker = "SOXL"
 
-    def Initialize(self):
-        get_yahoo_data(self.ticker, '2021-04-17', '2022-04-17')
+   
+        get_yahoo_data(self.ticker, '2021-01-01', '2022-01-01')
 
-        self.SetStartDate(2021, 4, 17)
-        self.SetEndDate(2022, 4, 17)
+        self.SetStartDate(2021, 1, 1)
+        self.SetEndDate(2022, 1, 1)
         self.SetCash(100000)
         self.SetWarmUp(100)
 

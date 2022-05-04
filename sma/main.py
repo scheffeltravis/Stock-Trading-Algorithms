@@ -6,7 +6,7 @@ from QuantConnect.Indicators import *
 
 
 class SMAAlgorithm(QCAlgorithm):
-    def __init__(self):
+    def Initialize(self):
         self.moving_averages_close = []
         self.moving_averages_high = []
         self.moving_averages_low = []
@@ -21,7 +21,6 @@ class SMAAlgorithm(QCAlgorithm):
         # self.ticker = "SOXL"
         self.ticker = "AAPL"
 
-    def Initialize(self):
         get_yahoo_data(self.ticker, '1990-11-01', '2019-03-07')
         # self.SetStartDate(2017, 1, 1)
         # self.SetEndDate(2018, 1, 1)

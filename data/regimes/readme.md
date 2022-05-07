@@ -12,7 +12,7 @@ Being able to reliably backtest against known and identifiable market regimes, a
 - Downtrend, with high volitility
 - Downtrend, with low volitility
 
-This data was all sourced from historial Apple, Inc. (AAPL) trading data, over varying time frames*.
+This data was all sourced from various historial trading data, over varying time frames*.
 
 \*This is because attempting to find all six regimes in real world data will most likely not all adhere to the same time frames. We did attempt to generate this data to allow for more continuity between the different data sets, but this proved more time consuming then manually finding them in the wild so to speak.
 
@@ -20,6 +20,6 @@ This data was all sourced from historial Apple, Inc. (AAPL) trading data, over v
 
 Within this directory, we have included the raw historical trading data in CSV format, as well as accompanying visual representations of the data to note the volitility and trend direction. The different data sets and visual representations are labelled both using the regime data found above:
 
-- Uptrend, with high volitility: `data/regimes/uptrend-high-volitility.[csv|png]`
-- Lateral, with high volitility: `data/regimes/lateral-high-volitility.[csv|png]`
-- Downtrend, with high volitility: `data/regimes/downtrend-high-volitility.[csv|png]`
+- Uptrend, with high volitility: `data/regimes/uptrend-high-volitility/`
+- Lateral, with high volitility: `data/regimes/lateral-high-volitility/`
+- Downtrend, with high volitility: `data/regimes/downtrend-high-volitility/`

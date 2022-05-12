@@ -1,7 +1,8 @@
 from AlgorithmImports import *
-from yahoo_reader import YahooData
-from yahoo_loader import *
 from QuantConnect.Indicators import *
+from yahoo_utils import *
+from regime_utils import *
+from datetime import datetime
 
 
 class ClimaxAlgorithm(QCAlgorithm):
@@ -9,33 +10,30 @@ class ClimaxAlgorithm(QCAlgorithm):
         self.moving_average_volume = 0
         self.rolling_window_length = 10
         self.trade_status = [0, 0]
+
+        # Configure necessary initialization data
         self.ticker = "SOXL"
-        # self.ticker = "AAPL"
+        start_date = datetime(2010, 3, 1)
+        end_date = datetime(2022, 5, 1)
+        
+        # Check if we are configured to test against regime data
+        regime = self.GetParameter("regime")
+        ticker = self.GetParameter("ticker")
+
+        # Configure the algorithm with regime test data
+        if regime and ticker:
+            data = get_regime_data(regime, ticker)
+
+            self.ticker = ticker
+            start_date = datetime.strptime(data["start_date"], "%Y-%m-%d")
+            end_date = datetime.strptime(data["end_date"], "%Y-%m-%d")
+
+        # Set start/end dates based on configured data above
+        self.SetStartDate(start_date.year, start_date.month, start_date.day + 10)    # Need to start after rolling window
+        self.SetEndDate(end_date.year, end_date.month, end_date.day)
 
         # Get the stock data from YF for the given timeframe
-        get_yahoo_data(self.ticker, '1990-11-01', '2022-05-04')
-        self.SetStartDate(2018, 1, 10)    # Need to start after rolling window
-        self.SetEndDate(2022, 5, 4)
-
-        # AAPL Regime Dates
-        # Downtrend High Volitility
-        # self.SetStartDate(2015, 6, 1)
-        # self.SetEndDate(2016, 2, 26)
-        # Downtrend Low Volitility
-        # self.SetStartDate(2012, 9, 4)
-        # self.SetEndDate(2013, 6, 28)
-        # Lateral High Volitility
-        # self.SetStartDate(1996, 8, 1)
-        # self.SetEndDate(1996, 12, 30)
-        # Lateral Low Volitility
-        # self.SetStartDate(2019, 2, 4)
-        # self.SetEndDate(2019, 3, 7)
-        # Uptrend High Volitility
-        # self.SetStartDate(2012, 2, 1)
-        # self.SetEndDate(2012, 9, 28)
-        # Uptrend Low Volitility
-        # self.SetStartDate(1990, 11, 10)
-        # self.SetEndDate(1991, 2, 27)
+        get_yahoo_data(self.ticker, start_date, end_date)
 
         # Set cash and warmup for investment tracking
         self.SetCash(100000)

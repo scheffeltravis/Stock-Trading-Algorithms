@@ -18,8 +18,10 @@ This data was all sourced from various historial trading data, over varying time
 
 ### Folder Structure
 
-Within this directory, we have included the raw historical trading data in CSV format, as well as accompanying visual representations of the data to note the volitility and trend direction. The different data sets and visual representations are labelled both using the regime data found above:
+Within this directory, we have included the raw historical trading data in CSV format, as well as accompanying visual representations of the data to note the volitility and trend direction. The different data sets and visual representations are grouped using the regime data found above:
 
 - Uptrend, with high volitility: `data/regimes/uptrend-high-volitility/`
 - Lateral, with high volitility: `data/regimes/lateral-high-volitility/`
 - Downtrend, with high volitility: `data/regimes/downtrend-high-volitility/`
+
+We also include a `regimes.json` file, which we use for cataloguing and testing against the different regime data sets.

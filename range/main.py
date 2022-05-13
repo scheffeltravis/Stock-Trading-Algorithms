@@ -1,8 +1,9 @@
 from AlgorithmImports import *
-from sqlalchemy import false
-from yahoo_reader import YahooData
-from yahoo_loader import *
 from QuantConnect.Indicators import *
+from sqlalchemy import false
+from yahoo_utils import *
+from regime_utils import *
+from datetime import datetime
 
 
 class RangeAlgorithm(QCAlgorithm):
@@ -12,52 +13,30 @@ class RangeAlgorithm(QCAlgorithm):
         self.moving_averages_low = []
         self.ma_lengths = [6, 18]
         self.trade_status = [0, 0]
-        # self.ticker = "^GSPC"
-        # self.ticker = "TQQQ"
-        # self.ticker = "TNA"
-        # self.ticker = "^IXIC"
-        # self.ticker = "UPRO"
-        # self.ticker = "UDOW"
-        # self.ticker = "SOXL"
+        
+        # Configure necessary initialization data
         self.ticker = "AAPL"
+        start_date = datetime(1990, 11, 1)
+        end_date = datetime(1991, 2, 27)
+        
+        # Check if we are configured to test against regime data
+        regime = self.GetParameter("regime")
+        ticker = self.GetParameter("ticker")
 
-        get_yahoo_data(self.ticker, '1990-11-01', '2019-03-07')
-        # self.SetStartDate(2017, 1, 1)
-        # self.SetEndDate(2018, 1, 1)
-        # self.SetStartDate(2017, 1, 1)
-        # self.SetEndDate(2019, 1, 1)
-        # self.SetStartDate(2021, 1, 1)
-        # self.SetEndDate(2022, 1, 1)
-        # self.SetStartDate(2021, 4, 22)
-        # self.SetEndDate(2022, 4, 22)
-        # self.SetStartDate(2022, 1, 1)
-        # self.SetEndDate(2022, 4, 22)
-        # self.SetStartDate(2017, 1, 1)
-        # self.SetEndDate(2020, 12, 30)
-        # self.SetStartDate(2017, 4, 22)
-        # self.SetEndDate(2022, 4, 22)
-        # self.SetStartDate(2017, 4, 27)
-        # self.SetEndDate(2022, 4, 27)
+        # Configure the algorithm with regime test data
+        if regime and ticker:
+            data = get_regime_data(regime, ticker)
 
-        # AAPL Regime Dates
-        # Downtrend High Volitility
-        # self.SetStartDate(2015, 6, 1)
-        # self.SetEndDate(2016, 2, 26)
-        # Downtrend Low Volitility
-        # self.SetStartDate(2012, 9, 4)
-        # self.SetEndDate(2013, 6, 28)
-        # Lateral High Volitility
-        # self.SetStartDate(1996, 8, 1)
-        # self.SetEndDate(1996, 12, 30)
-        # Lateral Low Volitility
-        # self.SetStartDate(2019, 2, 4)
-        # self.SetEndDate(2019, 3, 7)
-        # Uptrend High Volitility
-        # self.SetStartDate(2012, 2, 1)
-        # self.SetEndDate(2012, 9, 28)
-        # Uptrend Low Volitility
-        self.SetStartDate(1990, 11, 1)
-        self.SetEndDate(1991, 2, 27)
+            self.ticker = ticker
+            start_date = datetime.strptime(data["start_date"], "%Y-%m-%d")
+            end_date = datetime.strptime(data["end_date"], "%Y-%m-%d")
+
+        # Set start/end dates based on configured data above
+        self.SetStartDate(start_date.year, start_date.month, start_date.day)
+        self.SetEndDate(end_date.year, end_date.month, end_date.day)
+
+        # Get the stock data from YF for the given timeframe
+        get_yahoo_data(self.ticker, start_date, end_date)
 
         self.SetCash(100000)
         self.SetWarmUp(100)

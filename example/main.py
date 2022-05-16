@@ -41,7 +41,7 @@ class FirstAlgorithm(QCAlgorithm):
                 data: Slice object keyed by symbol containing the stock data
         """
         if not self.Portfolio.Invested:
-            self.SetHoldings("TQQQ", 1)
+            self.SetHoldings(self.ticker, 1)
             self.Debug("Purchased Stock")
 
         # Keep track of the values

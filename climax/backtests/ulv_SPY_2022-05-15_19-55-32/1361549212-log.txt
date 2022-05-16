@@ -1,0 +1,4 @@
+2006-07-24 00:00:00 Launching analysis for 1361549212 with LEAN Engine v2.5.0.0
+2006-07-15 00:00:00 Algorithm warming up...
+2006-07-24 00:00:00 Algorithm finished warming up.
+2007-02-16 16:00:00 Algorithm Id:(1361549212) completed in 0.60 seconds at 2k data points per second. Processing total of 1,168 data points.

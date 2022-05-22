@@ -12,12 +12,12 @@ class SMA_ROC_RSI(QCAlgorithm):
         self.moving_averages_low = []
         self.ma_lengths = [5, 10, 20, 62]
         self.trade_status = len(self.ma_lengths) * [0]
-        self.percent = 1.0
-
+      #  self.percent = 1.0
+       
         # Configure necessary initialization data
         self.ticker = "AAPL"
-        start_date = datetime(2012, 2, 1)
-        end_date = datetime(2012, 9, 28)
+        start_date = datetime(2015, 7, 21)
+        end_date = datetime(2016, 5, 17)
         
         # Check if we are configured to test against regime data
         regime = self.GetParameter("regime")
@@ -40,9 +40,7 @@ class SMA_ROC_RSI(QCAlgorithm):
         
         self.SetCash(100000)
         self.SetWarmUp(100)
-
-        self.sell_off = 0
-        
+               
         self.symbol = self.AddData(
             YahooData, self.ticker, Resolution.Daily).Symbol
 
@@ -64,127 +62,115 @@ class SMA_ROC_RSI(QCAlgorithm):
     def OnData(self, data):
         if self.IsWarmingUp:
             return
-        
-        if not self.rsi.IsReady: 
+
+        if not self.rsi.IsReady: #making sure indicator is ready to be use
             return
-        
+
         #define open and close prices
-        self.open_price = round((data[self.symbol].Open), 2)      
+        self.open_price = round((data[self.symbol].Open), 2)
         self.close_price = round((data[self.symbol].Close), 2)
-        
+
         #Rate of change calculated
-        self.roc_since_open = ((self.close_price - self.open_price) / self.open_price) * 100        
+        self.roc_since_open = ((self.close_price - self.open_price) / self.open_price) * 100
         self.roc_rounded = round(self.roc_since_open, 1)
-        
+
         #Momentum calculated
-        self.mom = (self.close_price - self.open_price) * 100        
+        self.mom = (self.close_price - self.open_price) * 100
         self.mom_rounded = round(self.mom, 1)
-        
-        # Set Limit Order to be good until market close
-        self.DefaultOrderProperties.TimeInForce = TimeInForce.Day
-        
-        changed = False        
-        for i in range(len(self.ma_lengths)):             
+
+        changed = False
+        for i in range(len(self.ma_lengths)):
             #if cross under the SMA high, confirm with RSI before buying
             if data[self.ticker].Close > self.moving_averages_high[i].Current.Value and self.trade_status[i] == 0:
+                
                 #RSI check
                 if self.rsi.Current.Value <= 30:
-                    self.Debug("RSI Used")                    
-                    #  RSI indication of oversold stock and ROC is slow (0.1-5%), then need to BUY   
-                    if (self.roc_since_open >= abs(0.1) and self.roc_since_open <= abs(5)): 
-                        self.Debug(f"MOM:{self.mom_rounded }, ROC: {self.roc_rounded }%  :  potentially where Momentum STARTS")                                          
-                        self.trade_status[i] = 1                      
+                    self.Debug("RSI Used")
+                   
+                    #  RSI indication of oversold stock and ROC is slow (0.1-5%), then need to BUY
+                    if (self.roc_since_open >= abs(0.1) and self.roc_since_open <= abs(5)):
+                        self.Debug(f"MOM:{self.mom_rounded }, ROC: {self.roc_rounded }%  :  potentially where Momentum STARTS")
+                        self.trade_status[i] = 1
                         changed = True
-                        
-                        self.percent = 1.0  # percent cash allocation                       
+                      # self.percent = 1.0  # percent cash allocation                            
                         self.Debug(f"{self.Time}: **BUY based off RSI-ROC-SMA, Close={self.close_price}, MOM:{self.mom_rounded }, ROC = {self.roc_rounded}, RSI = {self.rsi}")
-                                  
+
                     # RSI indication of oversold stock and ROC is more than +5%
                     elif self.roc_since_open > abs(5):
-                        self.Debug(f"MOM:{self.mom_rounded }, ROC: {self.roc_rounded }%  :  Momentum trending positive") 
-                        self.trade_status[i] = 1                      
+                        self.Debug(f"MOM:{self.mom_rounded }, ROC: {self.roc_rounded }%  :  Momentum trending positive")
+                        self.trade_status[i] = 1
                         changed = True
-                        
-                        self.percent = 0.95  # percent cash allocation                                                                                          
+                    #   self.percent = 0.95  # percent cash allocation
                         self.Debug(f"{self.Time}: **BUY based off RSI-ROC-SMA, Close={self.close_price}, MOM:{self.mom_rounded }, ROC = {self.roc_rounded}, RSI = {self.rsi}")
-                            
+
                 # I did not comment out this SMA option b/c I need to force the algo to buy something even if RSI is not use
                 # RSI lower bound not reached
-                else:                    
-                    self.Debug("RSI lower bound not reached") 
-                    self.trade_status[i] = 1                 
+                else:
+                    self.Debug("RSI lower bound not reached")
+                    self.trade_status[i] = 1
                     changed = True
-                
-                    self.percent = 0.90  # percent cash allocation        
+                   # self.percent = 0.95 # percent cash allocation
                     self.Debug(f"{self.Time}: **BUY based off only SMA,  Close={self.close_price}, MOM:{self.mom_rounded }, ROC = {self.roc_rounded}, RSI = {self.rsi}")
-                 
+
             # if cross over the SMA low, confirm with RSI before selling
-            if data[self.ticker].Close < self.moving_averages_low[i].Current.Value and self.trade_status[i] == 1:                       
+            if data[self.ticker].Close < self.moving_averages_low[i].Current.Value and self.trade_status[i] == 1:
+           
             # RSI check
                 if self.rsi.Current.Value >= 70:
                     self.Debug("RSI Used")
+                   
                     # RSI indication of overbought stock and ROC slowing down
                     if (self.roc_since_open >= abs(0.1) and self.roc_since_open <= abs(5)):
-                        self.Debug(f"MOM:{self.mom_rounded }, ROC: {self.roc_rounded }%  :  Momentum maybe slowing down")                  
-                        self.trade_status[i] = 0  
+                        self.Debug(f"MOM:{self.mom_rounded }, ROC: {self.roc_rounded }%  :  Momentum maybe slowing down")
+                        self.trade_status[i] = 0
                         changed = True
-                        
-                        self.percent = 1.0  #  percent cash allocation      
-                        self.Debug(f"{self.Time}: **SELL based off RSI-ROC-SMA, Close={self.close_price}, MOM:{self.mom_rounded }, ROC = {self.roc_rounded}, RSI = {self.rsi}")                             
-                    
+                     #  self.percent = 0.95 #  percent cash allocation  
+                        self.Debug(f"{self.Time}: **SELL based off RSI-ROC-SMA, Close={self.close_price}, MOM:{self.mom_rounded }, ROC = {self.roc_rounded}, RSI = {self.rsi}")
+
                     # RSI indication of overbought stock and ROC now trending negative
                     elif self.roc_since_open < 0:
-                        self.Debug(f"MOM:{self.mom_rounded }, ROC: {self.roc_rounded }%  :  Momentum trending negative") 
-                        self.trade_status[i] = 0 
+                        self.Debug(f"MOM:{self.mom_rounded }, ROC: {self.roc_rounded }%  :  Momentum trending negative")
+                        self.trade_status[i] = 0
                         changed = True
-                        
-                        self.percent = 1.0  # percent cash allocation                                                                                         
-                        self.Debug(f"{self.Time}: **SELL based off RSI-ROC-SMA, Close={self.close_price}, MOM:{self.mom_rounded }, ROC = {self.roc_rounded}, RSI = {self.rsi}")  
-            
-                    # RSI upper bound not reached
-                    elif self.rsi.Current.Value < 70:
-                        self.Debug("RSI upper bound not reached") 
-                        self.trade_status[i] = 0 #I need to find out what method allocates portions to sell at (75%)
-                        changed = True
-                        
-                        self.percent = 0.75  # percent cash allocation 
-                        self.Debug(f"{self.Time}: **SELL based off only SMA,  Close={self.close_price}, MOM:{self.mom_rounded }, ROC = {self.roc_rounded}, RSI = {self.rsi}")
-                       
-        self.Debug(f"{self.Time}: , Close={self.close_price}, MOM:{self.mom_rounded }, ROC = {self.roc_rounded}, RSI = {self.rsi}")       
+                      #  self.percent = 1.0  #  percent cash allocation
+                        self.Debug(f"{self.Time}: **SELL based off RSI-ROC-SMA, Close={self.close_price}, MOM:{self.mom_rounded }, ROC = {self.roc_rounded}, RSI = {self.rsi}")
 
+                # Code block commented out b/c I want to force sell only if RSI >= 70
+                 #   RSI upper bound not reached
+                # else:
+                #     self.Debug("RSI upper bound not reached")
+                #     self.trade_status[i] = 0 
+                #     changed = True
+                    
+                # RSI not enabled but ROC has slowed alot when SMA crosses over SMA low
+                if (self.roc_since_open >= abs(0.1) and self.roc_since_open <= abs(5)):
+                    self.Debug("RSI upper bound not reached but ROC is slowing down")
+                    self.trade_status[i] = 0 
+                    changed = True
+                 #  self.percent = 0.9  # percent cash allocation
+                    self.Debug(f"{self.Time}: **SELL based off SMA-ROC,  Close={self.close_price}, MOM:{self.mom_rounded }, ROC = {self.roc_rounded}, RSI = {self.rsi}")
+
+       # print
+        self.Debug(f"{self.Time}: , Close={self.close_price}, MOM:{self.mom_rounded }, ROC = {self.roc_rounded}, RSI = {self.rsi}")
+
+
+       
         if changed:
             self.Debug("HOLDINGS BEFORE CHANGE: QUANTITY - " +
                        str(self.Portfolio[self.symbol].Quantity) + " VALUE - " +
                        str(self.Portfolio.TotalHoldingsValue))
-           # buy_signals = sum(self.trade_status)
-            
-            self.Debug("TRADE STATUS " + str(self.trade_status))            
-           
-            #percentage = buy_signals / len(self.ma_lengths)       
-            self.Debug("PERCENTAGE IS " + str(self.percent))
-            self.SetHoldings(self.symbol, self.percent)
-            
-            # buying power to set up Limit Orders
-            buying_power = self.Portfolio.Cash * self.percent
-            quantity = buying_power // data[self.symbol].Value
-            self.LimitOrder(self.symbol, quantity, round(data[self.symbol].Value, 2))
-       
+            buy_signals = sum(self.trade_status)
+            # self.Debug(str(buy_signals))
+            self.Debug("TRADE STATUS " + str(self.trade_status))
+            percentage = buy_signals / len(self.ma_lengths)
+            self.Debug("PERCENTAGE IS " + str(percentage))
+            self.SetHoldings(self.symbol, percentage)
+            # self.Debug("HOLDINGS WERE CHANGED")
             self.Debug("HOLDINGS AFTER CHANGE: QUANTITY - " +
                        str(self.Portfolio[self.symbol].Quantity) + " VALUE - " +
                        str(self.Portfolio.TotalHoldingsValue))
             self.Debug(
                 f"{self.symbol.Value} - {self.Time}: Close={data[self.symbol].Close}")
             self.Debug(
-                 f"PORTFOLIO VALUE: {self.Portfolio.TotalPortfolioValue}")
+                f"PORTFOLIO VALUE: {self.Portfolio.TotalPortfolioValue}")
             self.Debug(" ")
-
-
-
-
-
-
-
-
-
-        
-     

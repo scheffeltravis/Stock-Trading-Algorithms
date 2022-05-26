@@ -17,13 +17,12 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v3
         with:
-          python-version: '3.6'
+          python-version: '3.x'
           cache: 'pip'
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install tk-tools
 
   act:
     name: Backtest Algorithms
@@ -33,5 +32,5 @@ jobs:
     steps:
       - name: Backtest example algorithm
         run: |
-          pip install lean
+          pip install tk-tools lean
           lean backtest example

@@ -9,9 +9,6 @@ jobs:
   arrange:
     name: Checkout and Configure
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.6", "3.7", "3.8", "3.9"]
 
     steps:
       - name: Checkout repository code
@@ -20,7 +17,8 @@ jobs:
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v3
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: '3.x'
+          cache: 'pip'
 
       - name: Install dependencies
         run: |

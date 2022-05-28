@@ -1,0 +1,256 @@
+2022-05-28T21:23:28.0391431Z TRACE:: Config.Get(): Configuration key not found. Key: data-directory - Using default value: ../../../Data/
+2022-05-28T21:23:28.0602795Z TRACE:: Config.Get(): Configuration key not found. Key: version-id - Using default value: 
+2022-05-28T21:23:28.0648576Z TRACE:: Config.Get(): Configuration key not found. Key: cache-location - Using default value: /Lean/Data
+2022-05-28T21:23:28.0663862Z TRACE:: Engine.Main(): LEAN ALGORITHMIC TRADING ENGINE v2.5.0.0 Mode: DEBUG (64bit) Host: ip-192-168-86-164
+2022-05-28T21:23:28.1080163Z TRACE:: Engine.Main(): Started 9:23 PM
+2022-05-28T21:23:28.1484561Z TRACE:: Config.Get(): Configuration key not found. Key: lean-manager-type - Using default value: LocalLeanManager
+2022-05-28T21:23:28.3099749Z TRACE:: JobQueue.NextJob(): Selected /LeanCLI/main.py
+2022-05-28T21:23:28.9338038Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-capacity - Using default value: 120
+2022-05-28T21:23:28.9388854Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-time-interval-minutes - Using default value: 1440
+2022-05-28T21:23:28.9398855Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-refill-amount - Using default value: 18
+2022-05-28T21:23:28.9558453Z TRACE:: Config.Get(): Configuration key not found. Key: job-organization-id - Using default value: 
+2022-05-28T21:23:28.9752908Z TRACE:: Config.Get(): Configuration key not found. Key: data-permission-manager - Using default value: DataPermissionManager
+2022-05-28T21:23:29.0454674Z TRACE:: AlgorithmManager.CreateTokenBucket(): Initializing LeakyBucket: Capacity: 120 RefillAmount: 18 TimeInterval: 1440
+2022-05-28T21:23:29.0623517Z TRACE:: Config.GetValue(): algorithm-manager-time-loop-maximum - Using default value: 20
+2022-05-28T21:23:29.2201403Z TRACE:: TextSubscriptionDataSourceReader.SetCacheSize(): Setting cache size to 71582788 items
+2022-05-28T21:23:31.8255269Z TRACE:: Config.GetValue(): algorithm-creation-timeout - Using default value: 90
+2022-05-28T21:23:31.8361218Z TRACE:: PythonInitializer.Initialize(): start...
+2022-05-28T21:23:36.9533231Z TRACE:: PythonInitializer.Initialize(): ended
+2022-05-28T21:23:36.9711029Z TRACE:: AlgorithmPythonWrapper(): Python version 3.6.8 |Anaconda, Inc.| (default, Dec 30 2018, 01:25:33) 
+[GCC 7.3.0]: Importing python module main
+2022-05-28T21:23:50.7947563Z TRACE:: AlgorithmPythonWrapper(): main successfully imported.
+2022-05-28T21:23:50.8340518Z TRACE:: AlgorithmPythonWrapper(): Creating IAlgorithm instance.
+2022-05-28T21:23:50.8750831Z TRACE:: Config.GetValue(): api-data-update-period - Using default value: 1
+2022-05-28T21:23:51.9743023Z TRACE:: Config.GetValue(): mute-python-library-logging - Using default value: True
+2022-05-28T21:23:52.0853730Z TRACE:: LocalObjectStore.Initialize(): Storage Root: /Storage/QCAlgorithm. StorageFileCount 100. StorageLimitMB 5
+2022-05-28T21:23:52.1986151Z TRACE:: BacktestingSetupHandler.Setup(): Setting up job: UID: 0, PID: 645020336, Version: 2.5.0.0, Source: WebIDE
+2022-05-28T21:23:52.2075654Z TRACE:: Config.Get(): Configuration key not found. Key: security-data-feeds - Using default value: 
+2022-05-28T21:23:53.0100561Z TRACE:: BaseSetupHandler.SetupCurrencyConversions():
+Symbol      Quantity    Conversion = Value in USD
+USD: $      100000.00 @       1.00 = $100000.0
+-------------------------------------------------
+CashBook Total Value:                $100000.0
+
+2022-05-28T21:23:53.0171435Z TRACE:: SetUp Backtesting: User: 0 ProjectId: 645020336 AlgoId: 1731098755
+2022-05-28T21:23:53.0197401Z TRACE:: Dates: Start: 07/06/2010 End: 04/28/2011 Cash: ¤100,000.00 MaximumRuntime: 100.00:00:00 MaxOrders: 2147483647
+2022-05-28T21:23:53.0323778Z TRACE:: BacktestingResultHandler(): Sample Period Set: 106.92
+2022-05-28T21:23:53.0348494Z TRACE:: Time.TradeableDates(): Security Count: 1
+2022-05-28T21:23:53.0474167Z TRACE:: Config.GetValue(): forward-console-messages - Using default value: True
+2022-05-28T21:23:53.0503886Z TRACE:: JOB HANDLERS: 
+2022-05-28T21:23:53.0510450Z TRACE::          DataFeed:     QuantConnect.Lean.Engine.DataFeeds.FileSystemDataFeed
+2022-05-28T21:23:53.0523138Z TRACE::          Setup:        QuantConnect.Lean.Engine.Setup.BacktestingSetupHandler
+2022-05-28T21:23:53.0532243Z TRACE::          RealTime:     QuantConnect.Lean.Engine.RealTime.BacktestingRealTimeHandler
+2022-05-28T21:23:53.0539157Z TRACE::          Results:      QuantConnect.Lean.Engine.Results.BacktestingResultHandler
+2022-05-28T21:23:53.0547810Z TRACE::          Transactions: QuantConnect.Lean.Engine.TransactionHandlers.BacktestingTransactionHandler
+2022-05-28T21:23:53.0556774Z TRACE::          Alpha:        QuantConnect.Lean.Engine.Alphas.DefaultAlphaHandler
+2022-05-28T21:23:53.0564405Z TRACE::          ObjectStore:  QuantConnect.Lean.Engine.Storage.LocalObjectStore
+2022-05-28T21:23:53.0573452Z TRACE::          History Provider:     QuantConnect.Lean.Engine.HistoricalData.HistoryProviderManager
+2022-05-28T21:23:53.2054612Z TRACE:: Debug: Launching analysis for 1731098755 with LEAN Engine v2.5.0.0
+2022-05-28T21:23:53.4243726Z TRACE:: Event Name "Daily Sampling", scheduled to run at 7/6/2010 4:00:00 AM (UTC)...
+2022-05-28T21:23:53.4323326Z TRACE:: AlgorithmManager.Run(): Begin DataStream - Start: 7/6/2010 12:00:00 AM Stop: 4/28/2011 11:59:59 PM
+2022-05-28T21:23:53.5603513Z TRACE:: AlgorithmManager.Stream(): WarmupHistoryRequest: UDOW.YahooData: Start: 3/28/2010 4:00:00 AM End: 7/6/2010 4:00:00 AM Resolution: Daily
+2022-05-28T21:23:53.5967348Z TRACE:: Config.GetValue(): data-feed-max-work-weight - Using default value: 400
+2022-05-28T21:23:53.5978062Z TRACE:: Config.GetValue(): data-feed-workers-count - Using default value: 4
+2022-05-28T21:23:53.5988999Z TRACE:: WeightedWorkScheduler(): will use 4 workers and MaxWorkWeight is 400
+2022-05-28T21:23:53.7178333Z TRACE:: Config.GetValue(): show-missing-data-logs - Using default value: False
+2022-05-28T21:23:53.9017930Z TRACE:: AlgorithmManager.Stream(): Finished warmup
+2022-05-28T21:23:54.2878572Z TRACE:: UniverseSelection.AddPendingInternalDataFeeds(): Adding internal benchmark data feed SPY,#0,SPY,Hour,TradeBar,Trade,Adjusted,OpenInterest,Internal
+2022-05-28T21:23:57.1770693Z TRACE:: Debug: Algorithm finished warming up.
+2022-05-28T21:23:57.4791855Z TRACE:: Debug: HOLDINGS BEFORE CHANGE: QUANTITY - 0.0 VALUE - 0.0
+TRADE STATUS [1, 0]
+BUY ORDER TRIGGERED
+HOLDINGS AFTER CHANGE: QUANTITY - 30231.0 VALUE - 99749.69240999223
+UDOW - 2010-07-17 00:00:00: Close=3.29958295822144
+PORTFOLIO VALUE: 100000.0
+ 
+2022-05-28T21:23:57.6310840Z TRACE:: Debug: HOLDINGS BEFORE CHANGE: QUANTITY - 30231.0 VALUE - 100543.25990796089
+TRADE STATUS [0, 1]
+SELL ORDER TRIGGERED
+HOLDINGS AFTER CHANGE: QUANTITY - 0.0 VALUE - 0.0
+UDOW - 2010-07-22 00:00:00: Close=3.3258330821991
+PORTFOLIO VALUE: 100793.56749796867
+ 
+2022-05-28T21:23:57.6324038Z TRACE:: Debug: HOLDINGS BEFORE CHANGE: QUANTITY - 0.0 VALUE - 0.0
+TRADE STATUS [1, 0]
+BUY ORDER TRIGGERED
+HOLDINGS AFTER CHANGE: QUANTITY - 28553.0 VALUE - 100542.25152230263
+UDOW - 2010-07-23 00:00:00: Close=3.52125000953674
+PORTFOLIO VALUE: 100793.56749796867
+ 
+2022-05-28T21:23:57.8430225Z TRACE:: Debug: HOLDINGS BEFORE CHANGE: QUANTITY - 28553.0 VALUE - 96723.28886151314
+TRADE STATUS [0, 1]
+SELL ORDER TRIGGERED
+HOLDINGS AFTER CHANGE: QUANTITY - 0.0 VALUE - 0.0
+UDOW - 2010-08-24 00:00:00: Close=3.38750004768372
+PORTFOLIO VALUE: 96974.6048371792
+ 
+2022-05-28T21:23:57.8944141Z TRACE:: Debug: HOLDINGS BEFORE CHANGE: QUANTITY - 0.0 VALUE - 0.0
+TRADE STATUS [1, 0]
+BUY ORDER TRIGGERED
+HOLDINGS AFTER CHANGE: QUANTITY - 27817.0 VALUE - 96722.01691412924
+UDOW - 2010-09-02 00:00:00: Close=3.47708296775818
+PORTFOLIO VALUE: 96974.6048371792
+ 
+2022-05-28T21:23:57.9953178Z TRACE:: Debug: HOLDINGS BEFORE CHANGE: QUANTITY - 27817.0 VALUE - 110769.60509753227
+TRADE STATUS [0, 1]
+SELL ORDER TRIGGERED
+HOLDINGS AFTER CHANGE: QUANTITY - 0.0 VALUE - 0.0
+UDOW - 2010-10-05 00:00:00: Close=3.9820830821991
+PORTFOLIO VALUE: 111022.19302058221
+ 
+2022-05-28T21:23:58.0472857Z TRACE:: Debug: HOLDINGS BEFORE CHANGE: QUANTITY - 0.0 VALUE - 0.0
+TRADE STATUS [1, 0]
+BUY ORDER TRIGGERED
+HOLDINGS AFTER CHANGE: QUANTITY - 26460.0 VALUE - 110768.18055152895
+UDOW - 2010-10-06 00:00:00: Close=4.18625020980835
+PORTFOLIO VALUE: 111022.19302058221
+ 
+2022-05-28T21:23:58.0994968Z TRACE:: Debug: HOLDINGS BEFORE CHANGE: QUANTITY - 26460.0 VALUE - 112168.36446762084
+TRADE STATUS [0, 1]
+SELL ORDER TRIGGERED
+HOLDINGS AFTER CHANGE: QUANTITY - 0.0 VALUE - 0.0
+UDOW - 2010-10-20 00:00:00: Close=4.23916721343994
+PORTFOLIO VALUE: 112422.3769366741
+ 
+2022-05-28T21:23:58.1505885Z TRACE:: Debug: HOLDINGS BEFORE CHANGE: QUANTITY - 0.0 VALUE - 0.0
+TRADE STATUS [1, 0]
+BUY ORDER TRIGGERED
+HOLDINGS AFTER CHANGE: QUANTITY - 25283.0 VALUE - 112172.25088834763
+UDOW - 2010-10-22 00:00:00: Close=4.43666696548462
+PORTFOLIO VALUE: 112422.3769366741
+ 
+2022-05-28T21:23:58.2522044Z TRACE:: Debug: HOLDINGS BEFORE CHANGE: QUANTITY - 25283.0 VALUE - 108832.77382612228
+TRADE STATUS [0, 1]
+SELL ORDER TRIGGERED
+HOLDINGS AFTER CHANGE: QUANTITY - 0.0 VALUE - 0.0
+UDOW - 2010-11-17 00:00:00: Close=4.30458307266235
+PORTFOLIO VALUE: 109082.89987444876
+ 
+2022-05-28T21:23:58.2534407Z TRACE:: Debug: HOLDINGS BEFORE CHANGE: QUANTITY - 0.0 VALUE - 0.0
+TRADE STATUS [1, 0]
+BUY ORDER TRIGGERED
+HOLDINGS AFTER CHANGE: QUANTITY - 24086.0 VALUE - 108828.5676317215
+UDOW - 2010-11-20 00:00:00: Close=4.51833295822144
+PORTFOLIO VALUE: 109082.89987444876
+ 
+2022-05-28T21:23:58.8107114Z TRACE:: Debug: HOLDINGS BEFORE CHANGE: QUANTITY - 24086.0 VALUE - 130516.00790596008
+TRADE STATUS [0, 1]
+SELL ORDER TRIGGERED
+HOLDINGS AFTER CHANGE: QUANTITY - 0.0 VALUE - 0.0
+UDOW - 2011-02-01 00:00:00: Close=5.41874980926514
+PORTFOLIO VALUE: 130770.34014868738
+ 
+2022-05-28T21:23:58.8115998Z TRACE:: Debug: HOLDINGS BEFORE CHANGE: QUANTITY - 0.0 VALUE - 0.0
+TRADE STATUS [1, 0]
+BUY ORDER TRIGGERED
+HOLDINGS AFTER CHANGE: QUANTITY - 23212.0 VALUE - 130519.1534729004
+UDOW - 2011-02-02 00:00:00: Close=5.62291717529297
+PORTFOLIO VALUE: 130770.34014868738
+ 
+2022-05-28T21:23:58.9124399Z TRACE:: Debug: HOLDINGS BEFORE CHANGE: QUANTITY - 23212.0 VALUE - 133691.44051170346
+TRADE STATUS [0, 1]
+SELL ORDER TRIGGERED
+HOLDINGS AFTER CHANGE: QUANTITY - 0.0 VALUE - 0.0
+UDOW - 2011-02-24 00:00:00: Close=5.75958299636841
+PORTFOLIO VALUE: 133942.62718749046
+ 
+2022-05-28T21:23:58.9639074Z TRACE:: Debug: HOLDINGS BEFORE CHANGE: QUANTITY - 0.0 VALUE - 0.0
+TRADE STATUS [1, 0]
+BUY ORDER TRIGGERED
+HOLDINGS AFTER CHANGE: QUANTITY - 22403.0 VALUE - 133689.90720033646
+UDOW - 2011-03-04 00:00:00: Close=5.96750020980835
+PORTFOLIO VALUE: 133942.62718749046
+ 
+2022-05-28T21:23:58.9654793Z TRACE:: Debug: HOLDINGS BEFORE CHANGE: QUANTITY - 22403.0 VALUE - 128201.16408157347
+TRADE STATUS [0, 1]
+SELL ORDER TRIGGERED
+HOLDINGS AFTER CHANGE: QUANTITY - 0.0 VALUE - 0.0
+UDOW - 2011-03-08 00:00:00: Close=5.72249984741211
+PORTFOLIO VALUE: 128453.88406872748
+ 
+2022-05-28T21:23:59.0667322Z TRACE:: Debug: HOLDINGS BEFORE CHANGE: QUANTITY - 0.0 VALUE - 0.0
+TRADE STATUS [1, 0]
+BUY ORDER TRIGGERED
+HOLDINGS AFTER CHANGE: QUANTITY - 22768.0 VALUE - 128202.80913543703
+UDOW - 2011-03-22 00:00:00: Close=5.6308331489563
+PORTFOLIO VALUE: 128453.88406872748
+ 
+2022-05-28T21:23:59.3193479Z TRACE:: Debug: HOLDINGS BEFORE CHANGE: QUANTITY - 22768.0 VALUE - 135754.2021713257
+TRADE STATUS [0, 1]
+SELL ORDER TRIGGERED
+HOLDINGS AFTER CHANGE: QUANTITY - 0.0 VALUE - 0.0
+UDOW - 2011-04-13 00:00:00: Close=5.96250009536743
+PORTFOLIO VALUE: 136005.27710461614
+ 
+2022-05-28T21:23:59.5232657Z TRACE:: Debug: HOLDINGS BEFORE CHANGE: QUANTITY - 0.0 VALUE - 0.0
+TRADE STATUS [1, 0]
+BUY ORDER TRIGGERED
+HOLDINGS AFTER CHANGE: QUANTITY - 21770.0 VALUE - 135754.08806800842
+UDOW - 2011-04-21 00:00:00: Close=6.23583316802978
+PORTFOLIO VALUE: 136005.27710461614
+ 
+2022-05-28T21:23:59.5582387Z TRACE:: Synchronizer.GetEnumerator(): Exited thread.
+2022-05-28T21:23:59.5608920Z TRACE:: AlgorithmManager.Run(): Firing On End Of Algorithm...
+2022-05-28T21:23:59.5799101Z TRACE:: Engine.Run(): Exiting Algorithm Manager
+2022-05-28T21:23:59.6111035Z TRACE:: FileSystemDataFeed.Exit(): Start. Setting cancellation token...
+2022-05-28T21:23:59.6209976Z TRACE:: FileSystemDataFeed.Exit(): Exit Finished.
+2022-05-28T21:23:59.6238059Z TRACE:: DefaultAlphaHandler.Exit(): Exiting...
+2022-05-28T21:23:59.6251526Z TRACE:: Debug: Algorithm Id:(1731098755) completed in 6.53 seconds at 0k data points per second. Processing total of 1,660 data points.
+2022-05-28T21:23:59.6609937Z TRACE:: DefaultAlphaHandler.Exit(): Ended
+2022-05-28T21:23:59.6678787Z TRACE:: BacktestingResultHandler.Exit(): starting...
+2022-05-28T21:23:59.6696127Z TRACE:: BacktestingResultHandler.Exit(): Saving logs...
+2022-05-28T21:23:59.6780890Z TRACE:: Debug: Your log was successfully created and can be retrieved from: /Results/1731098755-log.txt
+2022-05-28T21:23:59.6790467Z TRACE:: BacktestingResultHandler.Run(): Ending Thread...
+2022-05-28T21:23:59.6784961Z TRACE:: StopSafely(): waiting for 'Result Thread' thread to stop...
+2022-05-28T21:24:01.2379849Z TRACE:: 
+STATISTICS:: Total Trades 19
+STATISTICS:: Average Win 7.45%
+STATISTICS:: Average Loss -3.62%
+STATISTICS:: Compounding Annual Return 56.588%
+STATISTICS:: Drawdown 14.500%
+STATISTICS:: Expectancy 1.040
+STATISTICS:: Net Profit 43.979%
+STATISTICS:: Sharpe Ratio 1.778
+STATISTICS:: Probabilistic Sharpe Ratio 70.565%
+STATISTICS:: Loss Rate 33%
+STATISTICS:: Win Rate 67%
+STATISTICS:: Profit-Loss Ratio 2.06
+STATISTICS:: Alpha 0.009
+STATISTICS:: Beta 1.325
+STATISTICS:: Annual Standard Deviation 0.224
+STATISTICS:: Annual Variance 0.05
+STATISTICS:: Information Ratio 0.632
+STATISTICS:: Tracking Error 0.165
+STATISTICS:: Treynor Ratio 0.301
+STATISTICS:: Total Fees $0.00
+STATISTICS:: Estimated Strategy Capacity $0
+STATISTICS:: Lowest Capacity Asset UDOW.YahooData 2S
+STATISTICS:: Fitness Score 0.065
+STATISTICS:: Kelly Criterion Estimate 0
+STATISTICS:: Kelly Criterion Probability Value 0
+STATISTICS:: Sortino Ratio 2.636
+STATISTICS:: Return Over Maximum Drawdown 3.904
+STATISTICS:: Portfolio Turnover 0.076
+STATISTICS:: Total Insights Generated 0
+STATISTICS:: Total Insights Closed 0
+STATISTICS:: Total Insights Analysis Completed 0
+STATISTICS:: Long Insight Count 0
+STATISTICS:: Short Insight Count 0
+STATISTICS:: Long/Short Ratio 100%
+STATISTICS:: Estimated Monthly Alpha Value $0
+STATISTICS:: Total Accumulated Estimated Alpha Value $0
+STATISTICS:: Mean Population Estimated Insight Value $0
+STATISTICS:: Mean Population Direction 0%
+STATISTICS:: Mean Population Magnitude 0%
+STATISTICS:: Rolling Averaged Population Direction 0%
+STATISTICS:: Rolling Averaged Population Magnitude 0%
+STATISTICS:: OrderListHash 58e9995e485d3ac4d3f4623de68f394b
+2022-05-28T21:24:01.2403059Z TRACE:: BacktestingResultHandler.SendAnalysisResult(): Processed final packet
+2022-05-28T21:24:01.2416540Z TRACE:: Engine.Run(): Disconnecting from brokerage...
+2022-05-28T21:24:01.2431290Z TRACE:: Engine.Run(): Disposing of setup handler...
+2022-05-28T21:24:01.2456782Z TRACE:: Engine.Main(): Analysis Completed and Results Posted.
+2022-05-28T21:24:01.2481160Z TRACE:: Engine.Main(): Packet removed from queue: 1731098755
+2022-05-28T21:24:01.2496195Z TRACE:: LeanEngineSystemHandlers.Dispose(): start...
+2022-05-28T21:24:01.2508985Z TRACE:: LeanEngineSystemHandlers.Dispose(): Disposed of system handlers.
+2022-05-28T21:24:01.2552660Z TRACE:: LeanEngineAlgorithmHandlers.Dispose(): start...
+2022-05-28T21:24:01.2585809Z TRACE:: LeanEngineAlgorithmHandlers.Dispose(): Disposed of algorithm handlers.

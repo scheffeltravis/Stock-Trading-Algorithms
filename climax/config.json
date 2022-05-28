@@ -1,6 +1,6 @@
 {
     "algorithm-language": "Python",
     "parameters": {},
-    "description": "",
+    "description": "Attempted to detect high volume trading days with sharp price movements, to determine the direction to trade against.",
     "local-id": 645020336
 }

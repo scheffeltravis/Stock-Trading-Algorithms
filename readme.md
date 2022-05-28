@@ -22,6 +22,43 @@ Once you have confirmed you have the required prerequisites and have the Lean CL
 lean backtest example
 ```
 
+## Backtesting
+
+We have attempted to simplify the ability to backtest multiple tickers/regimes for a given algorithm by creating a testing script `backtest.py` which will run the configured backtests in parallel. Its use and configuration can be viewed by running the simple help command:
+
+```
+python backtest.py --help
+usage: backtest.py [-h] -a ALGORITHM [-r REGIME] [-t TICKER]
+
+Script used to simplify algorithm backtesting
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -a ALGORITHM, --algorithm ALGORITHM
+                        the algorithm to backtest
+  -r REGIME, --regime REGIME
+                        the specific regime used to backtest
+  -t TICKER, --ticker TICKER
+                        the specific stock ticker used to backtest
+```
+
+This script can take in any combination of regimes and tickers, which will ressult in a number of tests being run in parallel based on the hosts CPU count in order to distribute tasks:
+
+```
+# Executes backtests for all tickers in all regimes for the example algorithm, 24 TESTS TOTAL
+python backtest.py -a example
+
+# Executes backtests for all tickers in the downtrend-low-volitility regime for the example algorithm, 4 TESTS TOTAL
+python backtest.py -a example -r dlv
+
+# Executes backtests for the AAPL ticker in all regimes for the example algorithm, 6 TESTS TOTAL
+python backtest.py -a example -t AAPL
+
+# Executes backtests for the SPY ticker in the lateral-high-volitility regime for the example algorithm, 1 TEST TOTAL
+python backtest.py -a example -r lhv -t SPY
+```
+
+
 ## Project Structure
 
 This project is constructed with a `data/` directory (which houses all the testing data used in our backtesting and iteration) as well as multiple `<algorithm>/` directories (see [`example`](example/)), which each follow the same basic [Lean Python project structure](https://www.lean.io/docs/lean-cli/projects/structure#02-Python-Project-Structure).
@@ -30,14 +67,24 @@ This project is constructed with a `data/` directory (which houses all the testi
 
 All the data used in backtesting and verification is stored within the `data/` directory in this project (if you need to define a new location for your personal testing data, you can make that change in the [`lean.json`](lean.json)). Most of our current testing data can be found in `data/yahoo/`, as this is where we have pulled the majority of our data.
 
-Specific market regime data can be found under the `data/regimes/` directory, but changes will need to be made in the algorithm if you wish to backtest it against this data. We are hoping to improve this in the future.
+Specific market regime data can be found under the `data/regimes/` directory as well, if needed.
 
 ### Algorithms
 
 Within each algorithm directory, we have also included some extra functionality to make backtesting and gathering trading data easier. These extra methods rely on including the [Yahoo_Fin](http://theautomatic.net/yahoo_fin-documentation/) Python library (hence the `requirements.txt`). We included this as a custom Python library which can be excluded if needed using the [directions provided by Lean](https://www.lean.io/docs/lean-cli/projects/libraries/third-party-libraries#05-Custom-Python-Libraries):
 
-- `yahoo_loader.py` - defines functionality for pulling down trading data from Yahoo Finance, and storing it in a file based on the ticket key, i.e. it will pull data for *TQQQ* from Yahoo Finance for a given date range and store it in a file `data/yahoo/TQQQ.csv`
-- `yahoo_reader.py` - defines the custom data type `YahooData` we serialize the raw trading data into, which Lean can then analyze and run against
+- `yahoo_utils.py` - defines utilities for pulling down trading data from Yahoo Finance, storing it in a file based on the ticket key, and defining the custom data type `YahooData` we serialize the raw trading data into which Lean can then analyze and run against.
+e.g. it will pull data for *TQQQ* from Yahoo Finance for a given date range and store it in a file `data/yahoo/TQQQ.csv`, which can then be reresented in the `YahooData` data type format.
+- `regime_utils.py` - defines utilites for pulling down the regime data ranges used in our testing data found in `data/regimes/regimes.json` for a given ticker and regime type.
+e.g. it will return the start/end dates for *AAPL* in the *downward-low-volitility* regime, given the properties set in the algorithm `config.json`:
+
+```
+parameters = {
+    "regime": "dlv",
+    "ticker": "AAPL"
+}
+```
+
 - `requirements.txt` - includes the manifest of all custom Python libraries included/used in the encompassing algorithm
 
 ## Caveats

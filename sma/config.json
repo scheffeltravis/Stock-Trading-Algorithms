@@ -1,6 +1,6 @@
 {
     "algorithm-language": "Python",
     "parameters": {},
-    "description": "",
+    "description": "Compares moving averages of different lengths and close prices to identify the starts and ends of trends. Each comparison uses one moving average length and the total number of buy or sell signals across all comparisons is used to determine the weight of trades.",
     "local-id": 645020336
 }

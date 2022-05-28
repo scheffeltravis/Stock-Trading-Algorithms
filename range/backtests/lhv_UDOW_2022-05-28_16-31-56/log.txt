@@ -1,0 +1,67 @@
+2022-05-28T21:32:09.4062407Z TRACE:: Config.Get(): Configuration key not found. Key: data-directory - Using default value: ../../../Data/
+2022-05-28T21:32:09.4443204Z TRACE:: Config.Get(): Configuration key not found. Key: version-id - Using default value: 
+2022-05-28T21:32:09.4488581Z TRACE:: Config.Get(): Configuration key not found. Key: cache-location - Using default value: /Lean/Data
+2022-05-28T21:32:09.4525359Z TRACE:: Engine.Main(): LEAN ALGORITHMIC TRADING ENGINE v2.5.0.0 Mode: DEBUG (64bit) Host: ip-192-168-86-164
+2022-05-28T21:32:09.4826181Z TRACE:: Engine.Main(): Started 9:32 PM
+2022-05-28T21:32:09.5365435Z TRACE:: Config.Get(): Configuration key not found. Key: lean-manager-type - Using default value: LocalLeanManager
+2022-05-28T21:32:09.8160014Z TRACE:: JobQueue.NextJob(): Selected /LeanCLI/main.py
+2022-05-28T21:32:10.4894161Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-capacity - Using default value: 120
+2022-05-28T21:32:10.5186689Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-time-interval-minutes - Using default value: 1440
+2022-05-28T21:32:10.5293235Z TRACE:: Config.GetValue(): scheduled-event-leaky-bucket-refill-amount - Using default value: 18
+2022-05-28T21:32:10.5410167Z TRACE:: Config.Get(): Configuration key not found. Key: job-organization-id - Using default value: 
+2022-05-28T21:32:10.5423801Z TRACE:: Config.Get(): Configuration key not found. Key: data-permission-manager - Using default value: DataPermissionManager
+2022-05-28T21:32:10.6262889Z TRACE:: AlgorithmManager.CreateTokenBucket(): Initializing LeakyBucket: Capacity: 120 RefillAmount: 18 TimeInterval: 1440
+2022-05-28T21:32:10.6358484Z TRACE:: Config.GetValue(): algorithm-manager-time-loop-maximum - Using default value: 20
+2022-05-28T21:32:10.8542346Z TRACE:: TextSubscriptionDataSourceReader.SetCacheSize(): Setting cache size to 71582788 items
+2022-05-28T21:32:12.8648777Z TRACE:: Config.GetValue(): algorithm-creation-timeout - Using default value: 90
+2022-05-28T21:32:12.8713133Z TRACE:: PythonInitializer.Initialize(): start...
+2022-05-28T21:32:18.1261958Z TRACE:: PythonInitializer.Initialize(): ended
+2022-05-28T21:32:18.1431616Z TRACE:: AlgorithmPythonWrapper(): Python version 3.6.8 |Anaconda, Inc.| (default, Dec 30 2018, 01:25:33) 
+[GCC 7.3.0]: Importing python module main
+2022-05-28T21:32:31.1445424Z TRACE:: AlgorithmPythonWrapper(): main successfully imported.
+2022-05-28T21:32:31.1711552Z TRACE:: AlgorithmPythonWrapper(): Creating IAlgorithm instance.
+2022-05-28T21:32:31.2083312Z TRACE:: Config.GetValue(): api-data-update-period - Using default value: 1
+2022-05-28T21:32:31.7663069Z TRACE:: Config.GetValue(): mute-python-library-logging - Using default value: True
+2022-05-28T21:32:31.8694901Z TRACE:: LocalObjectStore.Initialize(): Storage Root: /Storage/QCAlgorithm. StorageFileCount 100. StorageLimitMB 5
+2022-05-28T21:32:31.9540770Z TRACE:: BacktestingSetupHandler.Setup(): Setting up job: UID: 0, PID: 645020336, Version: 2.5.0.0, Source: WebIDE
+2022-05-28T21:32:31.9793193Z TRACE:: Config.Get(): Configuration key not found. Key: security-data-feeds - Using default value: 
+2022-05-28T21:32:32.4187202Z TRACE:: BacktestingResultHandler(): Sample Period Set: 106.92
+2022-05-28T21:32:32.4574669Z TRACE:: Time.TradeableDates(): Security Count: 1
+2022-05-28T21:32:32.5186647Z TRACE:: Config.GetValue(): forward-console-messages - Using default value: True
+2022-05-28T21:32:33.3400889Z ERROR:: Engine.Run(): During the algorithm initialization, the following exception has occurred: 'RangeAlgorithm' object has no attribute 'inverse_ticker'
+  at Initialize
+    YahooData in main.py: line 67
+ 'RangeAlgorithm' object has no attribute 'inverse_ticker'
+2022-05-28T21:32:33.3414097Z TRACE:: JOB HANDLERS: 
+2022-05-28T21:32:33.3422387Z TRACE::          DataFeed:     QuantConnect.Lean.Engine.DataFeeds.FileSystemDataFeed
+2022-05-28T21:32:33.3431403Z TRACE::          Setup:        QuantConnect.Lean.Engine.Setup.BacktestingSetupHandler
+2022-05-28T21:32:33.3436405Z ERROR:: During the algorithm initialization, the following exception has occurred: 'RangeAlgorithm' object has no attribute 'inverse_ticker'
+  at Initialize
+    YahooData in main.py: line 67
+ 'RangeAlgorithm' object has no attribute 'inverse_ticker'
+2022-05-28T21:32:33.3447349Z TRACE::          RealTime:     QuantConnect.Lean.Engine.RealTime.BacktestingRealTimeHandler
+2022-05-28T21:32:33.3466145Z TRACE::          Results:      QuantConnect.Lean.Engine.Results.BacktestingResultHandler
+2022-05-28T21:32:33.3473411Z TRACE::          Transactions: QuantConnect.Lean.Engine.TransactionHandlers.BacktestingTransactionHandler
+2022-05-28T21:32:33.3480091Z TRACE::          Alpha:        QuantConnect.Lean.Engine.Alphas.DefaultAlphaHandler
+2022-05-28T21:32:33.3490176Z TRACE::          ObjectStore:  QuantConnect.Lean.Engine.Storage.LocalObjectStore
+2022-05-28T21:32:33.3503366Z TRACE::          History Provider:     QuantConnect.Lean.Engine.HistoricalData.HistoryProviderManager
+2022-05-28T21:32:33.3530469Z TRACE:: FileSystemDataFeed.Exit(): Start. Setting cancellation token...
+2022-05-28T21:32:33.3591624Z TRACE:: FileSystemDataFeed.Exit(): Exit Finished.
+2022-05-28T21:32:33.3636340Z TRACE:: DefaultAlphaHandler.Exit(): Exiting...
+2022-05-28T21:32:33.4100858Z TRACE:: DefaultAlphaHandler.Exit(): Ended
+2022-05-28T21:32:33.4136326Z TRACE:: BacktestingResultHandler.Exit(): starting...
+2022-05-28T21:32:33.4511674Z TRACE:: BacktestingResultHandler.Exit(): Saving logs...
+2022-05-28T21:32:33.4921071Z TRACE:: Debug: Your log was successfully created and can be retrieved from: /Results/1102067242-log.txt
+2022-05-28T21:32:33.4986367Z TRACE:: BacktestingResultHandler.Run(): Ending Thread...
+2022-05-28T21:32:33.5000320Z TRACE:: StopSafely(): waiting for 'Result Thread' thread to stop...
+2022-05-28T21:32:33.8203858Z TRACE:: 
+STATISTICS:: OrderListHash d41d8cd98f00b204e9800998ecf8427e
+2022-05-28T21:32:33.8452887Z TRACE:: BacktestingResultHandler.SendAnalysisResult(): Processed final packet
+2022-05-28T21:32:33.8478700Z TRACE:: Engine.Run(): Disconnecting from brokerage...
+2022-05-28T21:32:33.8487307Z TRACE:: Engine.Run(): Disposing of setup handler...
+2022-05-28T21:32:33.8507815Z TRACE:: Engine.Main(): Analysis Completed and Results Posted.
+2022-05-28T21:32:33.8530947Z TRACE:: Engine.Main(): Packet removed from queue: 1102067242
+2022-05-28T21:32:33.8547214Z TRACE:: LeanEngineSystemHandlers.Dispose(): start...
+2022-05-28T21:32:33.8561476Z TRACE:: LeanEngineSystemHandlers.Dispose(): Disposed of system handlers.
+2022-05-28T21:32:33.8577583Z TRACE:: LeanEngineAlgorithmHandlers.Dispose(): start...
+2022-05-28T21:32:33.8681086Z TRACE:: LeanEngineAlgorithmHandlers.Dispose(): Disposed of algorithm handlers.

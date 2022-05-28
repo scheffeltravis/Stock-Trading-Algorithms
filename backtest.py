@@ -1,3 +1,4 @@
+import os
 import sys
 import argparse
 import json
@@ -27,11 +28,21 @@ def main():
     start_time = datetime.now()
 
     # Run backtests based on given arguments
-    backtest_algorithm(args.algorithm, args.regime, args.ticker)
+    timestamp = backtest_algorithm(args.algorithm, args.regime, args.ticker)
 
     # Print the total time for all backtests executed
     total_time = datetime.now() - start_time
-    print("Total Execution Time: " + str(total_time.total_seconds()))
+    print("Backtest Execution Time: " + str(total_time.total_seconds()))
+
+    # Get start time of execution for reporting
+    start_time = datetime.now()
+
+    # Generate reports based on given arguments
+    generate_reports(args.algorithm, timestamp)
+
+    # Print the total time for all reports generated
+    total_time = datetime.now() - start_time
+    print("Reports Generation Time: " + str(total_time.total_seconds()))
 
 
 """Performs a set of backtests based on the provided configuration."""
@@ -70,11 +81,14 @@ def backtest_algorithm(algorithm, regime, ticker):
         regimes = list(data)
         tickers = list(data[regimes[0]])
 
+    # Set datetime in order to properly label backtest restults
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
     # Backtest all combinations of regimes/tickers for given algorithm
     for regime in regimes:
         for ticker in tickers:
             # Create directory for backtest results
-            backtest = "{}_{}_{}".format(regime, ticker, datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
+            backtest = "{}_{}_{}".format(regime, ticker, timestamp)
             path = Path(algorithm)/"backtests"/backtest
 
             # Set parameters for testing in config.json
@@ -90,11 +104,13 @@ def backtest_algorithm(algorithm, regime, ticker):
     # Clear parameters from config.json
     configure_backtest(algorithm)
 
+    return timestamp
+
 """Creates a subprocess which runs a specific backtest."""
 def execute_backtest(algorithm, output):
     run(
         ["lean", "backtest", algorithm, "--output", output],
-        stdout = PIPE, 
+        stdout = PIPE,
         stderr = PIPE
     )
 
@@ -131,6 +147,51 @@ def configure_backtest(algorithm, regime = None, ticker = None):
     json.dump(data, f, indent = 4)
     f.truncate()
     f.close()
+
+"""Generates a set of reports based on the provided configuration."""
+def generate_reports(algorithm, timestamp):
+    pool = mp.Pool(mp.cpu_count())
+
+    # Get recent backtest folders for given algorithm
+    path = Path(algorithm)/"backtests"
+    backtests = [Path(f.path) for f in os.scandir(path) if timestamp in f.path]
+    os.scandir()
+
+    # Generate reports for all recent backtests
+    for folder in backtests:
+        # Get backtest config file
+        path = folder/"config"
+
+        try:
+            f = open(path, "r")
+            data = json.loads(f.read())
+            f.close()
+        except FileNotFoundError:
+            print(f"No config.json file found in {algorithm} directory")
+            sys.exit(1)
+        except Exception as e:
+            print(f"Unexpected error opening {path}:", repr(e))
+            sys.exit(1)
+
+        # Set paths for executing report
+        report_path = folder/"report.html"
+        results_path = folder/str(data["id"])
+
+        # Create subprocesses to generate backtest report
+        pool.apply_async(execute_report, (algorithm, report_path, results_path.with_suffix(".json")))
+
+    # Close any remaining thread pools
+    pool.close()
+    pool.join()
+
+
+"""Creates a subprocess which executes a report for a specific backtest."""
+def execute_report(algorithm, report_path, results_path):
+    run(
+        ["lean", "report", "--report-destination", report_path, "--backtest-results", results_path],
+        stdout = PIPE, 
+        stderr = PIPE
+    )
 
 
 if __name__ == "__main__":

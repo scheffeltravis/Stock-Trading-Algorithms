@@ -5,3 +5,6 @@
 
 # We don't use the research books
 **/*.ipynb
+
+# We don't use the algorithm storage/ directories
+**/storage/

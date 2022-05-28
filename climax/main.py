@@ -91,11 +91,13 @@ class ClimaxAlgorithm(QCAlgorithm):
                        str(self.Portfolio.TotalHoldingsValue))
 
             if self.trade_status[0] == 1:
-                self.SetHoldings(self.symbol, 1)
+                quantity = self.Portfolio.Cash * .2 // data[self.symbol].Value
+                self.LimitOrder(self.symbol, quantity, round(data[self.symbol].Value, 2))
                 self.Debug("BUY ORDER TRIGGERED")
 
             if self.trade_status[1] == 1:
-                self.SetHoldings(self.symbol, 0)
+                quantity = self.Portfolio[self.symbol].Quantity * .2 // -1 
+                self.LimitOrder(self.symbol, quantity, round(data[self.symbol].Value, 2))
                 self.Debug("SELL ORDER TRIGGERED")
 
             self.Debug("HOLDINGS AFTER CHANGE: QUANTITY - " +

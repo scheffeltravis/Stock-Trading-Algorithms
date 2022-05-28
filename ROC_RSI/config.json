@@ -1,6 +1,6 @@
 {
     "algorithm-language": "Python",
     "parameters": {},
-    "description": "",
+    "description": "The relative strength index (RSI) momentum indicator evaluates overbought and oversold conditions using an oscillator gauged from 0-100. The ROC indicator is paired with the other the other indicators (SMA and RSI) to validate the perceived behavior of the momentum. The SMA indicator along with the RSI and ROC indicators translates a portrayal of momentum beginning, slowing down, or on the verge of reversal and the algorithm will trade based on these evaluations.",
     "local-id": 907417205
 }
